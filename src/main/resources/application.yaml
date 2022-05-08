@@ -1,0 +1,9 @@
+Spring:
+  jpa:
+    # 쿼리로그 보이기
+    show-sql: true
+
+    properties:
+      #mysql 쿼리로 보기
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
