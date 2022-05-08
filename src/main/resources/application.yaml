@@ -7,3 +7,6 @@ Spring:
       #mysql 쿼리로 보기
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  h2:
+    console:
+      enabled: true
