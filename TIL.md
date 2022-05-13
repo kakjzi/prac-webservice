@@ -55,3 +55,53 @@ _Hibernate 5.2.10 이상 사용권고 (LocalDate가 DB 매핑되지 않는 이�
 
 ### @CreatedDate & @LastModifiedDate
 * Entity가 생성 / 변경되어 저장될 때 시간이 자동 저장됩니다.
+---
+### 머스테치
+- `클라이언트 템플릿 엔진` 
+- JSP, Freemarker 등은 서버 템플릿 엔진
+- 인텔리제이 커뮤니티 버전도 지원 (thymeleaf 는 지원 안됨)
+
+---
+### 레이아웃 방식이란?
+- 공통 영역을 별도의 파일로 분리하여 필요한 곳에서 가져다 쓰는 방식을 이야기합니다.
+
+---
+스프링 부트는 기본적으로 src/main/resources/static에 위치한 자바스크리브,CSS, 이미지 등 `정적파일`들은 URL에서 /로 설정된다.
+
+```yaml
+spring:
+  resources:
+    static-locations: classpath:/static/
+```
+---
+### {{#posts}}
+- posts 라는 List 를 순회
+- for 과 비슷
+
+### {{id}} 등 {{ 변수명 }}
+- List 에서 뽑아낸 객체의 필드로 사용
+
+---
+```java
+@Query("SELECT p FROM Posts p ORDER BY p.id DESC")
+List<Posts> findAllDesc();
+```
+
+SpringDataJpa 에서 제공하지 않는 메소드는 위처럼 쿼리로 작성
+
+보통 조회는 `Querydsl, jooq, MyBatis` 사용
+
+그중 **querydsl 추천**
+- 타입 안정성 보장
+- 래퍼런스가 많음
+
+---
+### @Transactional
+- 데이터베이스의 상태를 변경하는 작업 또는 한번에 수행되어야 하는 연산들을 의미한다.
+- begin, commit 을 자동으로 수행해준다.
+- 예외 발생 시 rollback 처리를 자동으로 수행해준다.
+- 트랜잭션은 4가지의 성질을 가지고 있다.
+  - 원자성 : 한 트랙잭션 내 실행된 작업을 하나의 단위로 처리 
+  - 일관성 : 상태 유지
+  - 영속성 : 결과가 항상 저장
+  - 격리성 : 동시에 실행되는 트랙잭션은 서로 영향이 없도록 격리
