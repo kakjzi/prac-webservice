@@ -1,5 +1,7 @@
 package com.kakjzi.book.springboot.config.auth;
 
+import com.kakjzi.book.springboot.config.auth.dto.OAuthAttributes;
+import com.kakjzi.book.springboot.config.auth.dto.SessionUser;
 import com.kakjzi.book.springboot.domain.user.User;
 import com.kakjzi.book.springboot.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +15,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
-import java.net.HttpCookie;
+import java.util.Collections;
 
 @RequiredArgsConstructor
 @Service
@@ -34,6 +36,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
          * Login Primary KEY
          * Ex) Google = 'sub'
          */
+
         String userNameAttributeName = userRequest.getClientRegistration()
                 .getProviderDetails()
                 .getUserInfoEndpoint()
@@ -49,10 +52,9 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         httpSession.setAttribute("user", new SessionUser(user));
 
         return new DefaultOAuth2User(
-                collections.singleton(
+                Collections.singleton(
                         new SimpleGrantedAuthority(user.getRoleKey())),
                 attributes.getAttributes(),
-                attributes.getNameAttributes(),
                 attributes.getNameAttributeKey()
         );
     }
