@@ -30,23 +30,22 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         // Login Service Code
         String registrationId = userRequest.getClientRegistration()
-                .getRegistrationId();
+                                            .getRegistrationId();
 
         /**
          * Login Primary KEY
          * Ex) Google = 'sub'
          */
-
         String userNameAttributeName = userRequest.getClientRegistration()
-                .getProviderDetails()
-                .getUserInfoEndpoint()
-                .getUserNameAttributeName();
+                                                    .getProviderDetails()
+                                                    .getUserInfoEndpoint()
+                                                    .getUserNameAttributeName();
 
         //User Attributes
         OAuthAttributes attributes = OAuthAttributes
                 .of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
-        User user = saveOrUpate(attributes);
+        User user = saveOrUpdate(attributes);
 
         //User DTO
         httpSession.setAttribute("user", new SessionUser(user));
@@ -59,7 +58,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         );
     }
 
-    private User saveOrUpate(OAuthAttributes attributes){
+    private User saveOrUpdate(OAuthAttributes attributes){
         User user   = userRepository.findByEmail(attributes.getEmail())
                 .map(entity -> entity.update(attributes.getName(), attributes.getPicture()))
                 .orElse(attributes.toEntity());
