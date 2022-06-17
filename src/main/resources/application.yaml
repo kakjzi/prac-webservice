@@ -2,7 +2,6 @@ Spring:
   jpa:
     # 쿼리로그 보이기
     show-sql: true
-
     properties:
       #mysql 쿼리로 보기
       hibernate:
@@ -10,6 +9,9 @@ Spring:
   h2:
     console:
       enabled: true
+
+  session:
+    store-type: jdbc
 
   resources:
     static-locations: classpath:/static/
