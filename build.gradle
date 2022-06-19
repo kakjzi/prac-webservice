@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.kakjzi.book'
-version = '1.0-SNAPSHOT'
+version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 //lombok 설정 추가 시작
@@ -29,4 +29,8 @@ dependencies {
     implementation 'org.projectlombok:lombok'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
 }
